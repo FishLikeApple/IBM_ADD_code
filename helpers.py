@@ -197,7 +197,7 @@ def get_mesh(batch_size, shape_x, shape_y):
 
 class MyUNet(nn.Module):
     '''Mixture of previous classes'''
-    def __init__(self, n_classes):
+    def __init__(self, n_classes, use_depth=False):
         super(MyUNet, self).__init__()
         self.base_model = EfficientNet.from_pretrained('efficientnet-b0')
         #self.base_model2 = EfficientNet.from_pretrained('efficientnet-b0')
