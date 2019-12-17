@@ -251,11 +251,4 @@ def get_image_and_depth(input_path, monodepth_path):
     depth = preprocess_image(depth0, is_depth=True)
     depth = np.rollaxis(depth, 2, 0)
 
-    # try to load a mask
-    try:
-        mask0 = 255 - imread(mask_name, True)[:, :, 0]
-        img0 = cv2.add(img0, np.zeros(np.shape(img0), dtype=np.uint8), mask=mask0)
-    except:
-        pass
-
     return img, depth
