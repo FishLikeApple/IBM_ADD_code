@@ -1,11 +1,10 @@
-use_depth = True
 from helpers import *
 from efficientnet_pytorch import EfficientNet
 
 checkpoint = 'Model4.pth'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-model = MyUNet(8).to(device)
+model = MyUNet(8, use_depth=True).to(device)
 model.load_state_dict(torch.load(checkpoint))
 
 def inference(image, depth):
