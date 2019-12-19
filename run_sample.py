@@ -6,4 +6,4 @@ r = requests.get(url)
 with open("models-of-ibm-add.zip", "wb") as code:
       code.write(r.content)
     
-unzip_single('models-of-ibm-add.zip', '/../')
+unzip_single('models-of-ibm-add.zip', 'models/')
