@@ -28,7 +28,7 @@ header = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image
           'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0\
           .3538.25 Safari/537.36 Core/1.70.3732.400 QQBrowser/10.5.3819.400'}
 url = 'https://www.kaggle.com/dataset/965835a48e203aa402d44dc3278357247749ba78497bdb7fd06dfa72ec9d3a98/download'
-r = requests.post(url=url, headers=header, allow_redirects=False)
+r = requests.get(url=url, headers=header, allow_redirects=False)
 print(r.headers)
 r = requests.get(r.headers['location']) 
 with open("models-of-ibm-add.zip", "wb") as code:
