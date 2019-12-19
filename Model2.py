@@ -296,7 +296,7 @@ class MyUNet(nn.Module， use_depth=False):
         x = self.outc(x)
         return x
 
-model = MyUNet(8).to(device)
+model = MyUNet(8, use_depth=True).to(device)
 model.load_state_dict(torch.load(checkpoint))
 
 def inference(image):
