@@ -243,7 +243,7 @@ def _load_pretrained(model, pretrained):
 class MyUNet(nn.Module):
     '''Mixture of previous classes'''
     def __init__(self, n_classes, use_depth=False):
-        super(CentResnet, self).__init__()
+        super(MyUNet, self).__init__()
         self.base_model = resnet18(pretrained=False)
         
         # Lateral layers convert resnet outputs to a common feature size
