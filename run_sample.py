@@ -5,7 +5,7 @@ import requests
 header = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
           'accept-encoding': 'gzip, deflate, br',
           'accept-language': 'zh-CN,zh;q=0.9',
-          'cookie: GCLB=CPr7yuKmsrXi7wE; _ga=GA1.2.894895260.1574243575; ka_sessionid=b56807965a369e951aa92d\
+          'cookie': 'GCLB=CPr7yuKmsrXi7wE; _ga=GA1.2.894895260.1574243575; ka_sessionid=b56807965a369e951aa92d\
           721ae270309b52bfbe; CSRF-TOKEN=CfDJ8LdUzqlsSWBPr4Ce3rb9VL_Zzcku-1wTLjTFRkGcqkR88-WFW4mkM4eTT1aZoC15\
           y7o2nX2ewjSwoJ7sDC-USdpYyaZy9ksqPDs_7tExO3Kn8laNC8Z1CSvZYuvKCXHXMUmMfW4gRPrppamgcmDGtEU; _gid=GA1.2\
           .1709354907.1575516997; .ASPXAUTH=F322635B4C2F17C6946B0718DFF5537757A8A64549521FFD5086B37278BD9CEAC\
