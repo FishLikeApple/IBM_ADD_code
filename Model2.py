@@ -240,9 +240,9 @@ def _load_pretrained(model, pretrained):
     model_dict.update(pretrained)
     model.load_state_dict(model_dict)
     
-class MyUNet(nn.Module, use_depth=False):
+class MyUNet(nn.Module):
     '''Mixture of previous classes'''
-    def __init__(self, n_classes):
+    def __init__(self, n_classes, use_depth=False):
         super(CentResnet, self).__init__()
         self.base_model = resnet18(pretrained=False)
         
