@@ -1,6 +1,6 @@
 from helpers import *
 
-checkpoint = 'Model2.pth'
+checkpoint = 'models/Model2.pth'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class double_conv(nn.Module):
