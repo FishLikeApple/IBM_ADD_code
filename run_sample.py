@@ -1,13 +1,13 @@
 from helpers import *
-import Model1, Model2, Model3, Model4
 import requests 
 
-# download and unzip models
+# download, unzip and load models
 url = 'https://www.kaggle.com/dataset/965835a48e203aa402d44dc3278357247749ba78497bdb7fd06dfa72ec9d3a98/download' 
 r = requests.get(url) 
 with open("models-of-ibm-add.zip", "wb") as code:
       code.write(r.content)
 unzip_single('models-of-ibm-add.zip', 'models/')
+import Model1, Model2, Model3, Model4
 
 # get input of all the models
 image, depth = get_image_and_depth('test_sample.jpg', 'monodepth2/')
