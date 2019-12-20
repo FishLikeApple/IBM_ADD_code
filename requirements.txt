@@ -9,3 +9,5 @@ scipy
 torch
 torchvision
 kaggle
+requests
+BeautifulSoup
