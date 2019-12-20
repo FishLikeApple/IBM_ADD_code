@@ -15,9 +15,12 @@ header = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image
           'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.\
           0.3538.25 Safari/537.36 Core/1.70.3722.400 QQBrowser/10.5.3751.400'}
 url = 'https://drive.google.com/uc?export=download&confirm=pvHZ&id=1tXez97ZG4ElFTRGVS8ZbTFv8nCtMllqQ'
-r = requests.post(url=url, headers=header, allow_redirects=False)
-print(r.headers)
-r = requests.get(r.headers['location']) 
+url = 'https://doc-14-68-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/3kgqqj7s6lv\
+ggpb521vqqa9d89faheqp/1576814400000/15525272090825541285/*/1tXez97ZG4ElFTRGVS8ZbTFv8nCtMllqQ?e=download'
+#r = requests.post(url=url, headers=header, allow_redirects=False)
+#print(r.headers)
+#r = requests.get(r.headers['location']) 
+r = requests.get(url) 
 with open("models.zip", "wb") as code:
       code.write(r.content)
 unzip_single('models.zip', 'models/')
