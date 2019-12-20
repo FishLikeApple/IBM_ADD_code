@@ -1,4 +1,5 @@
 from helpers import *
+from output_merging import output_merging
 import requests
 from bs4 import BeautifulSoup
 
@@ -9,7 +10,6 @@ url = 'https://drive.google.com/uc?export=download&confirm=pvHZ&id=1tXez97ZG4ElF
 r = requests.get(url=url, headers=header)
 header['cookie'] = r.headers['set-cookie']
 soup = BeautifulSoup(r.text, "lxml")
-print(soup.select('#uc-download-link')[0])
 r = requests.get('https://drive.google.com'+soup.select('#uc-download-link')[0]['href'], headers=header) 
 with open("models.zip", "wb") as code:
       code.write(r.content)
@@ -26,4 +26,8 @@ model3_prediction = Model3.inference(image)
 model4_prediction = Model4.inference(image, depth)
 
 # merge all the predictions
-#prediction = 
+prediction1_3 = output_merging(model1_prediction, model3_prediction)
+prediction2_4 = output_merging(model2_prediction, model4_prediction)
+final_prediction = output_merging(prediction1_3, prediction2_4)
+
+print(final_prediction)
