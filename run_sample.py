@@ -2,8 +2,15 @@ from helpers import *
 import requests 
 
 # unzip and load models
-os.system('cat IBM_ADD_code/models/models.z* > models.zip')
-os.system('unzip -o models.zip')
+header = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0\
+          .3538.25 Safari/537.36 Core/1.70.3732.400 QQBrowser/10.5.3819.400'}
+url = 'https://drive.google.com/uc?export=download&confirm=pvHZ&id=1tXez97ZG4ElFTRGVS8ZbTFv8nCtMllqQ'
+r = requests.post(url=url, headers=header, allow_redirects=False)
+print(r.headers)
+r = requests.get(r.headers['location']) 
+with open("models.zip", "wb") as code:
+      code.write(r.content)
+unzip_single('models.zip', 'models/')
 import Model1, Model2, Model3, Model4
 
 # get input of all the models
