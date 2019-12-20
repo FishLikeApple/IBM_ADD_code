@@ -32,7 +32,7 @@ def run():
 
     # get input of all the models
     image, depth = get_image_and_depth(args.input, 'monodepth2/')
-    image_to_show = image[:, :, ::-1]
+    image_to_show = image[::-1, :, :]
 
     # get predictions of all the models
     model1_prediction = Model1.inference(image, image_to_show.shape)
