@@ -1,4 +1,4 @@
-from helpers import *
+from helpers_and_configurations import *
 
 if not use_ID_thr:
     def is_close_enough(a, b, TD_thr=TD_thr, RD_thr=RD_thr):
