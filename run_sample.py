@@ -1,4 +1,4 @@
-from helpers import *
+from helpers_and_configurations import *
 from output_merging import output_merging
 import requests
 from bs4 import BeautifulSoup
