@@ -261,11 +261,12 @@ def visualize(img, coords):
         img_cor_points = np.dot(camera_matrix, np.dot(Rt, P))
         img_cor_points = img_cor_points.T
         img_cor_points[:, 0] /= img_cor_points[:, 2]
+        img_cor_points[:, 0] -= img.shape[0] / 2
         img_cor_points[:, 1] /= img_cor_points[:, 2]
+        img_cor_points[:, 1] -= img.shape[1] / 2
         img_cor_points = img_cor_points.astype(int)
         # Drawing
         img = draw_line(img, img_cor_points)
-        img = draw_points(img, img_cor_points[-1:])
     
     return img
     
