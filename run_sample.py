@@ -6,10 +6,11 @@ from bs4 import BeautifulSoup
 header = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.\
           0.3538.25 Safari/537.36 Core/1.70.3722.400 QQBrowser/10.5.3751.400'}
 url = 'https://drive.google.com/uc?export=download&confirm=pvHZ&id=1tXez97ZG4ElFTRGVS8ZbTFv8nCtMllqQ'
-r = requests.get(url=url, headers=header, allow_redirects=False)
+r = requests.get(url=url, headers=header)
+header['cookie'] = r['set-cookie']
 soup = BeautifulSoup(r.text, "lxml")
 print(soup.select('#uc-download-link')[0])
-r = requests.get('https://drive.google.com'+soup.select('#uc-download-link')[0]['href']) 
+r = requests.get('https://drive.google.com'+soup.select('#uc-download-link')[0]['href'], headers=header) 
 with open("models.zip", "wb") as code:
       code.write(r.content)
 unzip_single('models.zip', 'models/')
