@@ -109,12 +109,12 @@ def convert_3d_to_2d(x, y, z, fx = 2304.5479, fy = 2305.8757, cx = 1686.2379, cy
     # stolen from https://www.kaggle.com/theshockwaverider/eda-visualization-baseline
     return x * fx / z + cx, y * fy / z + cy
 
-def optimize_xy(r, c, x0, y0, z0):
+def optimize_xy(r, c, x0, y0, z0, IMG_SHAPE):
     def distance_fn(xyz):
         x, y, z = xyz
         x, y = convert_3d_to_2d(x, y, z0)
         y, x = x, y
-        x = (x - IMG_SHAPE[0] // 2) * IMG_HEIGHT / (IMG_SHAPE[0] // 2) / MODEL_SCALE
+        x = (x - IMG_SHAPE[0]) * IMG_HEIGHT / IMG_SHAPE[0] / MODEL_SCALE
         x = np.round(x).astype('int')
         y = (y + IMG_SHAPE[1] // 4) * IMG_WIDTH / (IMG_SHAPE[1] * 1.5) / MODEL_SCALE
         y = np.round(y).astype('int')
@@ -135,7 +135,7 @@ def clear_duplicates(coords):
                     c1['confidence'] = -1
     return [c for c in coords if c['confidence'] > 0]
 
-def extract_coords(prediction):
+def extract_coords(prediction, image_shape):
     logits = prediction[0]
     regr_output = prediction[1:]
     points = np.argwhere(logits > logits_threshold)
@@ -145,7 +145,8 @@ def extract_coords(prediction):
         regr_dict = dict(zip(col_names, regr_output[:, r, c]))
         coords.append(_regr_back(regr_dict))
         coords[-1]['confidence'] = 1 / (1 + np.exp(-logits[r, c]))
-        coords[-1]['x'], coords[-1]['y'], coords[-1]['z'] = optimize_xy(r, c, coords[-1]['x'], coords[-1]['y'], coords[-1]['z'])
+        coords[-1]['x'], coords[-1]['y'], coords[-1]['z'] = optimize_xy(r, c, coords[-1]['x'], coords[-1]['y'], 
+                                                                        coords[-1]['z'], image_shape)
     coords = clear_duplicates(coords)
     return coords
 
