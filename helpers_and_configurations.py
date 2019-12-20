@@ -74,8 +74,6 @@ def _regr_back(regr_dict):
     return regr_dict
 
 def preprocess_image(img, is_depth=False):
-    if not is_depth:
-        img = img[img.shape[0] // 2:]
     bg = np.ones_like(img) * img.mean(1, keepdims=True).astype(img.dtype)
     bg = bg[:, :img.shape[1] // 4]
     img = np.concatenate([bg, img, bg], 1)
