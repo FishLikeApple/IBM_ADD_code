@@ -4,7 +4,7 @@ import requests
 # unzip and load models
 if(platform.system()=='Windows'):
     os.system('type IBM_ADD_code/models/models.z* > models.zip')
-else(platform.system()=='Linux'):
+else:
     os.system('cat IBM_ADD_code/models/models.z* > models.zip')
     
 unzip_single('models.zip', 'models/')
