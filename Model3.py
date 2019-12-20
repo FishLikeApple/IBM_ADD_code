@@ -1,7 +1,7 @@
 from helpers import *
 from efficientnet_pytorch import EfficientNet
 
-checkpoint = 'models/Model3.pth'
+checkpoint = 'Model3.pth'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class double_conv(nn.Module):
