@@ -263,6 +263,7 @@ def visualize(img, coords):
         img_cor_points[:, 0] /= img_cor_points[:, 2]
         img_cor_points[:, 1] /= img_cor_points[:, 2]
         img_cor_points = img_cor_points.astype(int)
+        print(img_cor_points)
         # Drawing
         img = draw_line(img, img_cor_points)
         img = draw_points(img, img_cor_points[-1:])
