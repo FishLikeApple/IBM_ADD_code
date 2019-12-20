@@ -34,10 +34,10 @@ def run():
     image, depth = get_image_and_depth(args.input, 'monodepth2/')
 
     # get predictions of all the models
-    model1_prediction = Model1.inference(image)
-    model2_prediction = Model2.inference(image, depth)
-    model3_prediction = Model3.inference(image)
-    model4_prediction = Model4.inference(image, depth)
+    model1_prediction = Model1.inference(image, image.shape)
+    model2_prediction = Model2.inference(image, depth, image.shape)
+    model3_prediction = Model3.inference(image, image.shape)
+    model4_prediction = Model4.inference(image, depth, image.shape)
 
     # merge all the predictions
     prediction1_3 = output_merging(model1_prediction, model3_prediction)
