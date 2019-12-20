@@ -20,13 +20,17 @@ IMG_WIDTH = 2048
 IMG_HEIGHT = IMG_WIDTH // 4
 MODEL_SCALE = 8
 model_directory = 'models/'
+logits_threshold = 0
 
+# configurations of merging
 TD_thr = 0.05
 RD_thr = 10
-
 # the real threshold is (5400/distance)*ID_thr_factor, where distance is the distance from the camera to a current object.
 ID_thr_factor = 0.3
 use_ID_thr = True
+
+# configurations of rules
+
 
 def imread(path, fast_mode=False):
     img = cv2.imread(path)
