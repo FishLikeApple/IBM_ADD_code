@@ -3,7 +3,7 @@ import requests
 
 # unzip and load models
 os.system('type IBM_ADD_code/models/models.z* > models.zip')
-os.system('unzip models.zip')
+os.system('unzip -o models.zip')
 import Model1, Model2, Model3, Model4
 
 # get input of all the models
