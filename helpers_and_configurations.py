@@ -158,7 +158,7 @@ def get_image_and_depth(input_path, monodepth_path):
 
     os.system('python '+monodepth_path+'test_simple.py --image_path '+input_path+' --model_name mono+stereo_1024x320')
     depth_name = os.path.splitext(os.path.basename(input_path))[0]
-    depth_path = os.path.join(output_directory, "{}_disp.jpeg".format(output_name))
+    depth_path = os.path.join('IBM_ADD_code', "{}_disp.jpeg".format(output_name))
     depth0 = imread(depth_path, True)
     depth = preprocess_image(depth0, is_depth=True)
     depth = np.rollaxis(depth, 2, 0)
