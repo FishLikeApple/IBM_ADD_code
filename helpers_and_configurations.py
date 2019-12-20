@@ -6,6 +6,7 @@ import seaborn as sns
 import os
 from sklearn.model_selection import train_test_split
 from scipy.optimize import minimize
+from scipy.spatial.transform import Rotation as R
 
 import torch
 import torch.nn as nn
@@ -21,6 +22,12 @@ IMG_HEIGHT = IMG_WIDTH // 4
 MODEL_SCALE = 8
 model_directory = 'models/'
 logits_threshold = 0
+
+# camera parameters
+fx = 2304.5479 
+fy = 2305.8757
+cx = 1686.2379
+cy = 1354.9849
 
 # configurations of merging
 TD_thr = 0.05
@@ -85,27 +92,9 @@ def preprocess_image(img, is_depth=False):
     img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
     return (img / 255).astype('float32')
     
-def get_mask_and_regr(img, labels):
-    mask = np.zeros([IMG_HEIGHT // MODEL_SCALE, IMG_WIDTH // MODEL_SCALE], dtype='float32')
-    regr_names = ['x', 'y', 'z', 'yaw', 'pitch', 'roll']
-    regr = np.zeros([IMG_HEIGHT // MODEL_SCALE, IMG_WIDTH // MODEL_SCALE, 7], dtype='float32')
-    coords = str2coords(labels)
-    xs, ys = get_img_coords(labels)
-    for x, y, regr_dict in zip(xs, ys, coords):
-        x, y = y, x
-        x = (x - img.shape[0] // 2) * IMG_HEIGHT / (img.shape[0] // 2) / MODEL_SCALE
-        x = np.round(x).astype('int')
-        y = (y + img.shape[1] // 4) * IMG_WIDTH / (img.shape[1] * 1.5) / MODEL_SCALE
-        y = np.round(y).astype('int')
-        if x >= 0 and x < IMG_HEIGHT // MODEL_SCALE and y >= 0 and y < IMG_WIDTH // MODEL_SCALE:
-            mask[x, y] = 1
-            regr_dict = _regr_preprocess(regr_dict)
-            regr[x, y] = [regr_dict[n] for n in sorted(regr_dict)]
-    return mask, regr
-    
 DISTANCE_THRESH_CLEAR = 2
 
-def convert_3d_to_2d(x, y, z, fx = 2304.5479, fy = 2305.8757, cx = 1686.2379, cy = 1354.9849):
+def convert_3d_to_2d(x, y, z, fx=fx, fy=fy, cx=cx, cy=cy):
     # stolen from https://www.kaggle.com/theshockwaverider/eda-visualization-baseline
     return x * fx / z + cx, y * fy / z + cy
 
