@@ -1,7 +1,7 @@
 # IBM_ADD_code
 
 # Environment
-Python3, git, pip
+Linux or Windows, Python3, git, pip
 
 # How To Use
 git clone https://github.com/FishLikeApple/IBM_ADD_code  
