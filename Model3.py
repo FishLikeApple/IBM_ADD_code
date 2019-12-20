@@ -107,11 +107,11 @@ class MyUNet(nn.Module):
 model = MyUNet(8).to(device)
 model.load_state_dict(torch.load(checkpoint))
 
-def inference(image):
+def inference(image, image_shape):
   # the inference function of this model
   
   img = torch.tensor(image[None]).to(device)
   output = model(img).data.cpu().numpy()
-  coords_pred = extract_coords(output[0])
+  coords_pred = extract_coords(output[0], image_shape)
   
   return coords_pred
