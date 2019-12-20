@@ -1,4 +1,4 @@
-from helpers import *
+from helpers_and_configurations import *
 from efficientnet_pytorch import EfficientNet
 
 checkpoint = model_directory + 'Model4.pth'
