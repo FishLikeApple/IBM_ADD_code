@@ -7,7 +7,7 @@ os.system('unzip -o models.zip')
 import Model1, Model2, Model3, Model4
 
 # get input of all the models
-image, depth = get_image_and_depth('test_sample.jpg', 'monodepth2/')
+image, depth = get_image_and_depth('IBM_ADD_code/test_sample.jpg', 'monodepth2/')
 
 # get predictions of all the models
 model1_prediction = Model1.inference(image)
