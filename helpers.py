@@ -1,10 +1,8 @@
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import cv2
-from tqdm import tqdm_notebook as tqdm
 import matplotlib.pyplot as plt
 import seaborn as sns
-from functools import reduce
 import os
 from sklearn.model_selection import train_test_split
 from scipy.optimize import minimize
@@ -167,3 +165,90 @@ def unzip_single(src_file, dest_dir, password=False):
     except RuntimeError as e:
         print(e)
     zf.close()
+    
+def get_img_coords(inp):
+    '''
+    Input is a PredictionString (e.g. from train dataframe) or a coordinate list
+    Output is two arrays:
+        xs: x coordinates in the image (row)
+        ys: y coordinates in the image (column)
+    '''
+    if isinstance(inp, str):
+        coords = str2coords(inp)
+    else:
+        coords = inp
+    xs = [c['x'] for c in coords]
+    ys = [c['y'] for c in coords]
+    zs = [c['z'] for c in coords]
+    P = np.array(list(zip(xs, ys, zs))).T
+    img_p = np.dot(camera_matrix, P).T
+    img_p[:, 0] /= img_p[:, 2]
+    img_p[:, 1] /= img_p[:, 2]
+    img_xs = img_p[:, 0]
+    img_ys = img_p[:, 1]
+    img_zs = img_p[:, 2] # z = Distance from the camera
+    return img_xs, img_ys
+
+# convert euler angle to rotation matrix
+def euler_to_Rot(yaw, pitch, roll):
+    Y = np.array([[cos(yaw), 0, sin(yaw)],
+                  [0, 1, 0],
+                  [-sin(yaw), 0, cos(yaw)]])
+    P = np.array([[1, 0, 0],
+                  [0, cos(pitch), -sin(pitch)],
+                  [0, sin(pitch), cos(pitch)]])
+    R = np.array([[cos(roll), -sin(roll), 0],
+                  [sin(roll), cos(roll), 0],
+                  [0, 0, 1]])
+    return np.dot(Y, np.dot(P, R))
+    
+def expand_df(df, PredictionStringCols):
+    df = df.dropna().copy()
+    df['NumCars'] = [int((x.count(' ')+1)/7) for x in df['PredictionString']]
+
+    image_id_expanded = [item for item, count in zip(df['ImageId'], df['NumCars']) for i in range(count)]
+    prediction_strings_expanded = df['PredictionString'].str.split(' ',expand = True).values.reshape(-1,7).astype(float)
+    prediction_strings_expanded = prediction_strings_expanded[~np.isnan(prediction_strings_expanded).all(axis=1)]
+    df = pd.DataFrame(
+        {
+            'ImageId': image_id_expanded,
+            PredictionStringCols[0]:prediction_strings_expanded[:,0],
+            PredictionStringCols[1]:prediction_strings_expanded[:,1],
+            PredictionStringCols[2]:prediction_strings_expanded[:,2],
+            PredictionStringCols[3]:prediction_strings_expanded[:,3],
+            PredictionStringCols[4]:prediction_strings_expanded[:,4],
+            PredictionStringCols[5]:prediction_strings_expanded[:,5],
+            PredictionStringCols[6]:prediction_strings_expanded[:,6]
+        })
+    return df
+
+def TranslationDistance(p,g, abs_dist = False):
+    dx = p['x'] - g['x']
+    dy = p['y'] - g['y']
+    dz = p['z'] - g['z']
+    diff0 = (g['x']**2 + g['y']**2 + g['z']**2)**0.5
+    diff1 = (dx**2 + dy**2 + dz**2)**0.5
+    if abs_dist:
+        diff = diff1
+    else:
+        diff = diff1/diff0
+    return diff
+
+def RotationDistance(p, g):
+    true=[ g['pitch'] ,g['yaw'] ,g['roll'] ]
+    pred=[ p['pitch'] ,p['yaw'] ,p['roll'] ]
+    q1 = R.from_euler('xyz', true)
+    q2 = R.from_euler('xyz', pred)
+    diff = R.inv(q2) * q1
+    W = np.clip(diff.as_quat()[-1], -1., 1.)
+    
+    # in the official metrics code:
+    # https://www.kaggle.com/c/pku-autonomous-driving/overview/evaluation
+    #   return Object3D.RadianToDegree( Math.Acos(diff.W) )
+    # this code treat θ and θ+2π differntly.
+    # So this should be fixed as follows.
+    W = (acos(W)*360)/pi
+    if W > 180:
+        W = 360 - W
+    return W
+
