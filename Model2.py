@@ -1,4 +1,4 @@
-from helpers import *
+from helpers_and_configurations import *
 
 checkpoint = model_directory + 'Model2.pth'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
