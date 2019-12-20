@@ -38,6 +38,11 @@ def imread(path, fast_mode=False):
         img = np.array(img[:, :, ::-1])
     return img
 
+def rotate(x, angle):
+    x = x + angle
+    x = x - (x + np.pi) // (2 * np.pi) * 2 * np.pi
+    return x
+
 def str2coords(s, names=['id', 'yaw', 'pitch', 'roll', 'x', 'y', 'z']):
     '''
     Input:
