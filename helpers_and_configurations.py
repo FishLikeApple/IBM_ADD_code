@@ -25,7 +25,7 @@ TD_thr = 0.05
 RD_thr = 10
 
 # the real threshold is (5400/distance)*ID_thr_factor, where distance is the distance from the camera to a current object.
-ID_thr_factor = 0.0
+ID_thr_factor = 0.3
 use_ID_thr = True
 
 def imread(path, fast_mode=False):
