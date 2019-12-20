@@ -7,7 +7,7 @@ sklearn
 scipy
 torch
 torchvision
-efficientnet-pytorch
+efficientnet_pytorch
 kaggle
 requests
 beautifulsoup4
