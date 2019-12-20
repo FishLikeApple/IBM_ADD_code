@@ -299,11 +299,12 @@ class MyUNet(nn.Module):
 model = MyUNet(8, use_depth=True).to(device)
 model.load_state_dict(torch.load(checkpoint))
 
-def inference(image):
+def inference(image, depth):
   # the inference function of this model
   
   img = torch.tensor(image[None]).to(device)
-  output = model(img).data.cpu().numpy()
+  depth = torch.tensor(depth[None]).to(device)
+  output = model(img, depth).data.cpu().numpy()
   coords_pred = extract_coords(output[0])
   
   return coords_pred
