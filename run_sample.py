@@ -1,6 +1,6 @@
 from helpers import *
 import requests
-import BeautifulSoup
+from bs4 import BeautifulSoup
 
 # unzip and load models
 header = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.\
