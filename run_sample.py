@@ -2,7 +2,7 @@ from helpers import *
 import requests 
 
 # unzip and load models
-unzip_single('models/models.zip', 'models/')
+unzip_single('IBM_ADD_code/models/models.zip', 'models/')
 import Model1, Model2, Model3, Model4
 
 # get input of all the models
