@@ -1,33 +1,50 @@
 from helpers_and_configurations import *
 from output_merging import output_merging
+import argparse
 import requests
 from bs4 import BeautifulSoup
 
-# unzip and load models
-header = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.\
-          0.3538.25 Safari/537.36 Core/1.70.3722.400 QQBrowser/10.5.3751.400'}
-url = 'https://drive.google.com/uc?export=download&confirm=pvHZ&id=1tXez97ZG4ElFTRGVS8ZbTFv8nCtMllqQ'
-r = requests.get(url=url, headers=header)
-header['cookie'] = r.headers['set-cookie']
-soup = BeautifulSoup(r.text, "lxml")
-r = requests.get('https://drive.google.com'+soup.select('#uc-download-link')[0]['href'], headers=header) 
-with open("models.zip", "wb") as code:
-      code.write(r.content)
-unzip_single('models.zip', 'models/')
-import Model1, Model2, Model3, Model4
+def parse_args():
+    parser = argparse.ArgumentParser()
 
-# get input of all the models
-image, depth = get_image_and_depth('IBM_ADD_code/test_sample.jpg', 'monodepth2/')
+    parser.add_argument('--input', type=str)
+    parser.add_argument('--output', type=str)
 
-# get predictions of all the models
-model1_prediction = Model1.inference(image)
-model2_prediction = Model2.inference(image, depth)
-model3_prediction = Model3.inference(image)
-model4_prediction = Model4.inference(image, depth)
+    return parser.parse_args()
 
-# merge all the predictions
-prediction1_3 = output_merging(model1_prediction, model3_prediction)
-prediction2_4 = output_merging(model2_prediction, model4_prediction)
-final_prediction = output_merging(prediction1_3, prediction2_4)
+def run():
+          
+    # get args
+    args = parse_args()
 
-print(final_prediction)
+    # unzip and load models
+    header = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.\
+            0.3538.25 Safari/537.36 Core/1.70.3722.400 QQBrowser/10.5.3751.400'}
+    url = 'https://drive.google.com/uc?export=download&confirm=pvHZ&id=1tXez97ZG4ElFTRGVS8ZbTFv8nCtMllqQ'
+    r = requests.get(url=url, headers=header)
+    header['cookie'] = r.headers['set-cookie']
+    soup = BeautifulSoup(r.text, "lxml")
+    r = requests.get('https://drive.google.com'+soup.select('#uc-download-link')[0]['href'], headers=header) 
+    with open("models.zip", "wb") as code:
+        code.write(r.content)
+    unzip_single('models.zip', 'models/')
+    import Model1, Model2, Model3, Model4
+
+    # get input of all the models
+    image, depth = get_image_and_depth(args.input, 'monodepth2/')
+
+    # get predictions of all the models
+    model1_prediction = Model1.inference(image)
+    model2_prediction = Model2.inference(image, depth)
+    model3_prediction = Model3.inference(image)
+    model4_prediction = Model4.inference(image, depth)
+
+    # merge all the predictions
+    prediction1_3 = output_merging(model1_prediction, model3_prediction)
+    prediction2_4 = output_merging(model2_prediction, model4_prediction)
+    final_prediction = output_merging(prediction1_3, prediction2_4)
+
+    print(final_prediction)
+
+if __name__ == '__main__':
+    run()
