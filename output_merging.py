@@ -34,6 +34,7 @@ else:
 def output_merging(A_coords, M_coords):
     
     new_M_coords = M_coords.copy()
+    paired_M_coords = []
     for A_coord in A_coords:
         candidate = {'candidate':None, 'TD':99999999}
         for j in range(len(M_coords)):
