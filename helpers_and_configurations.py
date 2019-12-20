@@ -232,8 +232,8 @@ def draw_line(image, points):
 def draw_points(image, points):
     for (p_x, p_y, p_z) in points:
         cv2.circle(image, (p_x, p_y), int(1000 / p_z), (0, 255, 0), -1)
-         if p_x > image.shape[1] or p_y > image.shape[0]:
-             print('Point', p_x, p_y, 'is out of image with shape', image.shape)
+        if p_x > image.shape[1] or p_y > image.shape[0]:
+            print('Point', p_x, p_y, 'is out of image with shape', image.shape)
     return image
 
 def visualize(img, coords):
