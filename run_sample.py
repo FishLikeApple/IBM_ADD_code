@@ -2,6 +2,7 @@ from helpers import *
 import requests 
 
 # unzip and load models
+import platform
 if(platform.system()=='Windows'):
     os.system('type IBM_ADD_code/models/models.z* > models.zip')
 else:
