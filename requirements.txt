@@ -3,7 +3,6 @@ pandas
 opencv-python
 matplotlib
 seaborn
-functools
 sklearn
 scipy
 torch
