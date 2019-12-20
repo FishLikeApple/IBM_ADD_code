@@ -21,6 +21,7 @@ from torchvision import transforms, utils
 IMG_WIDTH = 2048
 IMG_HEIGHT = IMG_WIDTH // 4
 MODEL_SCALE = 8
+model_directory = 'models/'
 
 def str2coords(s, names=['id', 'yaw', 'pitch', 'roll', 'x', 'y', 'z']):
     '''
