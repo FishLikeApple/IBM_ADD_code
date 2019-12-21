@@ -38,9 +38,9 @@ camera_matrix = np.array([[fx, 0, cx],
 
 # configurations of merging
 TD_thr = 0.05
-RD_thr = 5
+RD_thr = 10
 # the real threshold is (5400/distance)*ID_thr_factor, where distance is the distance from the camera to a current object.
-ID_thr_factor = 0.3
+ID_thr_factor = 0.0
 use_ID_thr = True
 #merging_plan = 'non-max-suppress'
 merging_plan = 'weighted-add'
