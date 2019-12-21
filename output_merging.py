@@ -28,7 +28,7 @@ else:
         if distance > (5400.0/a['z'])*thr_factor:
             return False, None, None
 
-        return True, distance, None
+        return True, distance, RD
     
 # the main function
 def output_merging(A_coords, M_coords):
@@ -42,6 +42,7 @@ def output_merging(A_coords, M_coords):
             enough, TD, RD = is_close_enough(A_coord, M_coord)
             #print(enough)
             if enough and M_coord not in paired_M_coords and candidate['TD']>TD:
+                print(RD)
                 candidate['candidate'] = M_coord
                 candidate['TD'] = TD
                 candidate['index'] = j
