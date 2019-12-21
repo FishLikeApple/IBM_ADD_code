@@ -32,23 +32,22 @@ def run():
 
     # get input of all the models
     image, depth = get_image_and_depth(args.input, 'monodepth2/')
-    image_to_show = np.array(image[:, :, ::-1])
+    image_to_show = imread(args.input)
 
     # get predictions of all the models
     model1_prediction = Model1.inference(image, image_to_show.shape)
-    #model2_prediction = Model2.inference(image, depth, image_to_show.shape)
-    #model3_prediction = Model3.inference(image, image_to_show.shape)
-    #model4_prediction = Model4.inference(image, depth, image_to_show.shape)
+    model2_prediction = Model2.inference(image, depth, image_to_show.shape)
+    model3_prediction = Model3.inference(image, image_to_show.shape)
+    model4_prediction = Model4.inference(image, depth, image_to_show.shape)
 
     # merge all the predictions
-    #prediction1_3 = output_merging(model1_prediction, model3_prediction)
-    #prediction2_4 = output_merging(model2_prediction, model4_prediction)
-    #final_prediction = output_merging(prediction1_3, prediction2_4)
+    prediction1_3 = output_merging(model1_prediction, model3_prediction)
+    prediction2_4 = output_merging(model2_prediction, model4_prediction)
+    final_prediction = output_merging(prediction1_3, prediction2_4)
     
-    #print(model1_prediction)
     print(image.shape)
     print(image_to_show.shape)
-    #cv2.imwrite(args.output, visualize(image_to_show, model1_prediction))
+    cv2.imwrite(args.output, visualize(image_to_show, final_prediction))
 
 if __name__ == '__main__':
     run()
