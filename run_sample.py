@@ -45,9 +45,8 @@ def run():
     prediction2_4 = output_merging(model2_prediction, model4_prediction)
     final_prediction = output_merging(prediction1_3, prediction2_4)
     
-    print(image.shape)
-    print(image_to_show.shape)
-    cv2.imwrite(args.output, visualize(image_to_show, final_prediction)[:, :, ::-1])
+    print(final_prediction[0])
+    cv2.imwrite(args.output, visualize(image_to_show, final_prediction[0])[:, :, ::-1])
 
 if __name__ == '__main__':
     run()
