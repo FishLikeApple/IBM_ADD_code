@@ -47,7 +47,7 @@ def run():
     
     print(image.shape)
     print(image_to_show.shape)
-    cv2.imwrite(args.output, visualize(image_to_show, final_prediction))
+    cv2.imwrite(args.output, visualize(image_to_show, final_prediction)[:, :, ::-1])
 
 if __name__ == '__main__':
     run()
