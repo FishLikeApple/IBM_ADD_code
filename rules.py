@@ -9,7 +9,7 @@ def rule1(input_coords, warning_coords=[], D=D1, judgment_width=3):
           
     return warning_coords
 
-def rule2(input_coords, warning_coords=[], D=D2, pitch_threshold=0.03):
+def rule2(input_coords, warning_coords=[], D=D2, pitch_threshold=0.1):
   
     for input_coord in input_coords:
         if input_coord not in warning_coords:
@@ -23,7 +23,7 @@ def rule2(input_coords, warning_coords=[], D=D2, pitch_threshold=0.03):
           
     return warning_coords
   
-def rule3(input_coords, warning_coords=[], D=D3, pitch_threshold=0.03):
+def rule3(input_coords, warning_coords=[], D=D3, pitch_threshold=0.1):
   
     warning_coords = []
     for input_coord in input_coords:
@@ -37,7 +37,7 @@ def rule3(input_coords, warning_coords=[], D=D3, pitch_threshold=0.03):
                     
     return warning_coords
 
-def rule4(input_coords, warning_coords=[], D=D4, pitch_threshold=0.03):
+def rule4(input_coords, warning_coords=[], D=D4, pitch_threshold=0.1):
     # actually the same as the above func
   
     warning_coords = []
