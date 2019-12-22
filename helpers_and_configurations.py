@@ -48,8 +48,8 @@ merging_plan = 'weighted-add'
 # configurations of rules
 D1 = 100
 D2 = 100
-D3 = 150
-D4 = 150
+D3 = 75
+D4 = 75
 
 def imread(path, fast_mode=False):
     img = cv2.imread(path)
