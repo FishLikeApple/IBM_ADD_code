@@ -49,8 +49,8 @@ def run():
     # apply rules
     warning_coords = rule1(final_prediction)
     warning_coords = rule2(final_prediction, warning_coords)
-    #warning_coords = rule3(final_prediction, warning_coords)
-    #warning_coords = rule4(final_prediction, warning_coords)
+    warning_coords = rule3(final_prediction, warning_coords)
+    warning_coords = rule4(final_prediction, warning_coords)
     
     # output the result
     cv2.imwrite(args.output, visualize(image_to_show, warning_coords)[:, :, ::-1])
