@@ -9,7 +9,7 @@ def rule1(input_coords, warning_coords=[], D=D1, judgment_width=3):
           
     return warning_coords
 
-def rule2(input_coords, warning_coords=[], D=D2, pitch_threshold=0.1):
+def rule2(input_coords, warning_coords=[], D=D2, pitch_threshold=0.03):
   
     for input_coord in input_coords:
         if input_coord not in warning_coords:
