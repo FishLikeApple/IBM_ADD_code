@@ -1,10 +1,10 @@
 from helpers_and_configurations import *
 
-def rule1(input_coords, warning_coords=[], D1=D1, judgment_width=2.5):
+def rule1(input_coords, warning_coords=[], D1=D1, judgment_width=3):
   
     for input_coord in input_coords:
         if input_coord not in warning_coords:
-            if input_coord['z']<D1 and np.abs(input_coord['x'])<judgment_width*1.1:
+            if input_coord['z']<D1 and np.abs(input_coord['x'])<judgment_width:
                 warning_coords.append(input_coord)
           
     return warning_coords
