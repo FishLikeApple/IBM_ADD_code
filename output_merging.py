@@ -42,7 +42,7 @@ def output_merging(A_coords, M_coords):
             enough, TD, RD = is_close_enough(A_coord, M_coord)
             #print(enough)
             if enough and M_coord not in paired_M_coords and candidate['TD']>TD:
-                print(RD)
+                #print(RD)
                 candidate['candidate'] = M_coord
                 candidate['TD'] = TD
                 candidate['index'] = j
