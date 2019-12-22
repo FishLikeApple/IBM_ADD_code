@@ -1,15 +1,37 @@
 from helpers_and_configurations import *
 
-def rule1(input_coords, D1=D1, car_width=6):
+def rule1(input_coords, warning_coords=[], D1=D1, judgment_width=2.5):
   
-    warning_coords = []
     for input_coord in input_coords:
-        if input_coord['z']<D1 and np.abs(input_coord['x'])<car_width*1.1:
-          warning_coords.append(input_coord)
+        if input_coord not in warning_coords:
+            if input_coord['z']<D1 and np.abs(input_coord['x'])<judgment_width*1.1:
+                warning_coords.append(input_coord)
           
     return warning_coords
 
-def rule2(input_coords, D2=D2):
+def rule2(input_coords, warning_coords=[], D2=D2, pitch_threshold=0.03):
+  
+    for input_coord in input_coords:
+        if input_coord not in warning_coords:
+            if input_coord['z'] < D2:
+                input_coord['x'] > 0:
+                    pitch = input_coord['pitch'] - np.pi/2
+                else:
+                    pitch = input_coord['pitch'] + np.pi/2
+                if np.abs(np.arctan(input_coord['y']/input_coord['x'])-pitch) > pitch_threshold:
+                    warning_coords.append(input_coord)
+          
+    return warning_coords
+  
+def rule3(input_coords, D2=D2, pitch_threshold=0.03):
+  
+    warning_coords = []
+    for input_coord in input_coords:
+        if input_coord['z'] < D1:
+          pitch = input_coord['pitch'] + np.pi/2
+#          if np.abs(pitch)<np.pi/2 and input_coord[]:
+
+def rule4(input_coords, D2=D2, pitch_threshold=0.03):
   
     warning_coords = []
     for input_coord in input_coords:
