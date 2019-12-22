@@ -25,7 +25,6 @@ def rule2(input_coords, warning_coords=[], D=D2, pitch_threshold=0.1):
   
 def rule3(input_coords, warning_coords=[], D=D3, pitch_threshold=0.2):
   
-    warning_coords = []
     for input_coord in input_coords:
         if input_coord['z'] < D:
             if input_coord['x'] > 0:
@@ -41,7 +40,6 @@ def rule3(input_coords, warning_coords=[], D=D3, pitch_threshold=0.2):
 def rule4(input_coords, warning_coords=[], D=D4, pitch_threshold=0.2):
     # actually the same as the above func
   
-    warning_coords = []
     for input_coord in input_coords:
         if input_coord['z'] < D:
             if input_coord['x'] > 0:
