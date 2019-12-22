@@ -55,8 +55,6 @@ def run():
     # output the result
     cv2.imwrite(args.output, visualize(image_to_show, warning_coords)[:, :, ::-1])
     #cv2.imwrite(args.output, visualize(image_to_show, final_prediction)[:, :, ::-1]) # use this to see all predicted cars
-    
-    print('???')
 
 if __name__ == '__main__':
     run()
