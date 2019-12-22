@@ -14,7 +14,7 @@ def rule2(input_coords, warning_coords=[], D2=D2, pitch_threshold=0.03):
     for input_coord in input_coords:
         if input_coord not in warning_coords:
             if input_coord['z'] < D2:
-                input_coord['x'] > 0:
+                if input_coord['x'] > 0:
                     pitch = input_coord['pitch'] - np.pi/2
                 else:
                     pitch = input_coord['pitch'] + np.pi/2
