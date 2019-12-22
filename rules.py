@@ -29,11 +29,11 @@ def rule3(input_coords, warning_coords=[], D=D3, pitch_threshold=0.03):
     for input_coord in input_coords:
         if input_coord['z'] < D:
             if input_coord['x'] > 0:
-                    pitch = -input_coord['pitch']
-                else:
-                    pitch = input_coord['pitch']
-                if pitch<180+pitch_threshold and pitch>0-pitch_threshold:
-                    warning_coords.append(input_coord)
+                pitch = -input_coord['pitch']
+            else:
+                pitch = input_coord['pitch']
+            if pitch<180+pitch_threshold and pitch>0-pitch_threshold:
+                warning_coords.append(input_coord)
                     
     return warning_coords
 
@@ -44,10 +44,10 @@ def rule4(input_coords, warning_coords=[], D=D4, pitch_threshold=0.03):
     for input_coord in input_coords:
         if input_coord['z'] < D:
             if input_coord['x'] > 0:
-                    pitch = -input_coord['pitch'] - np.pi/2
-                else:
-                    pitch = input_coord['pitch']
-                if pitch<180+pitch_threshold and pitch>0-pitch_threshold:
-                    warning_coords.append(input_coord)
+                pitch = -input_coord['pitch']
+            else:
+                pitch = input_coord['pitch']
+            if pitch<180+pitch_threshold and pitch>0-pitch_threshold:
+                warning_coords.append(input_coord)
                    
     return warning_coords
