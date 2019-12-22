@@ -40,7 +40,7 @@ camera_matrix = np.array([[fx, 0, cx],
 TD_thr = 0.05
 RD_thr = 10
 # the real threshold is (5400/distance)*ID_thr_factor, where distance is the distance from the camera to a current object.
-ID_thr_factor = 0.0
+ID_thr_factor = 0.3
 use_ID_thr = True
 #merging_plan = 'non-max-suppress'
 merging_plan = 'weighted-add'
@@ -231,7 +231,7 @@ def draw_line(image, points):
 
 def draw_points(image, points):
     for (p_x, p_y, p_z) in points:
-        cv2.circle(image, (p_x, p_y), int(1000 / p_z), (0, 255, 0), -1)
+        cv2.circle(image, (p_x, p_y), int(1000 / p_z), (255, 0, 0), -1)
         if p_x > image.shape[1] or p_y > image.shape[0]:
             print('Point', p_x, p_y, 'is out of image with shape', image.shape)
     return image
@@ -266,9 +266,8 @@ def visualize(img, coords):
         img_cor_points[:, 1] = img_cor_points[:, 1] * img.shape[0] / 1355
         img_cor_points[:, 1] -= img.shape[0]
         img_cor_points = img_cor_points.astype(int)
-        print(img_cor_points)
+        
         # Drawing
-        img = draw_line(img, img_cor_points)
         img = draw_points(img, img_cor_points[-1:])
 
     return img
