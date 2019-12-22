@@ -105,7 +105,7 @@ class MyUNet(nn.Module):
         return x
 
 model = MyUNet(8).to(device)
-model.load_state_dict(torch.load(checkpoint), map_location=device)
+model.load_state_dict(torch.load(checkpoint, map_location=device))
 
 def inference(image, image_shape):
   # the inference function of this model
