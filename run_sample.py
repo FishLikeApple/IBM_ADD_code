@@ -45,10 +45,14 @@ def run():
     prediction1_3 = output_merging(model1_prediction, model3_prediction)
     prediction2_4 = output_merging(model2_prediction, model4_prediction)
     final_prediction = output_merging(prediction1_3, prediction2_4)
-    #final_prediction = [{'pitch_cos': 0.59360904, 'pitch_sin': -0.24772033, 'roll': -3.1061471869521817, 'x': -11.181987056191053, 'y': 8.72277623304764, 'yaw': 0.16682477, 'z': 50.86036920547485, 'pitch': -0.3953410892477194, 'confidence': 0.7037750499289187}]
-    print(final_prediction)
+    
+    # apply rules
     warning_coords = rule1(final_prediction)
     warning_coords = rule2(final_prediction, warning_coords)
+    warning_coords = rule3(final_prediction, warning_coords)
+    warning_coords = rule4(final_prediction, warning_coords)
+    
+    # output the result
     cv2.imwrite(args.output, visualize(image_to_show, warning_coords)[:, :, ::-1])
 
 if __name__ == '__main__':
