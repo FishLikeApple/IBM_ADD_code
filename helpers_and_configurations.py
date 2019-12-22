@@ -262,6 +262,8 @@ def visualize(img, coords):
         img_cor_points = img_cor_points.T
         img_cor_points[:, 0] /= img_cor_points[:, 2]
         img_cor_points[:, 1] /= img_cor_points[:, 2]
+        img_cor_points[:, 0] = img_cor_points[:, 0] * img.shape[1] / 3384
+        img_cor_points[:, 1] = img_cor_points[:, 1] * img.shape[0] / 1355
         img_cor_points[:, 1] -= img.shape[0]
         img_cor_points = img_cor_points.astype(int)
         print(img_cor_points)
@@ -321,7 +323,8 @@ def RotationDistance(p, g):
         W = 360 - W
     return W
 
-#def calculate_vertical_intersection(coord):
-  #
+#def calculate_intersection_distance(coord1, coord2):
+  
+    
   
   
