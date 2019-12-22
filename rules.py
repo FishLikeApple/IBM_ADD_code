@@ -32,6 +32,7 @@ def rule3(input_coords, warning_coords=[], D=D3, pitch_threshold=0.2):
                 pitch = -input_coord['pitch']
             else:
                 pitch = input_coord['pitch']
+            print(pitch)
             if pitch<np.pi+pitch_threshold and pitch>0-pitch_threshold:
                 warning_coords.append(input_coord)
                     
@@ -47,6 +48,7 @@ def rule4(input_coords, warning_coords=[], D=D4, pitch_threshold=0.2):
                 pitch = -input_coord['pitch']
             else:
                 pitch = input_coord['pitch']
+            print(pitch)
             if pitch<np.pi+pitch_threshold and pitch>0-pitch_threshold:
                 warning_coords.append(input_coord)
                    
