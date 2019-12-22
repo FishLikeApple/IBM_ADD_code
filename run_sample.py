@@ -1,6 +1,6 @@
 from helpers_and_configurations import *
 from output_merging import output_merging
-from rules improt *
+from rules import *
 import argparse
 import requests
 from bs4 import BeautifulSoup
