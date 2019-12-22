@@ -1,5 +1,6 @@
 from helpers_and_configurations import *
 from output_merging import output_merging
+from rules improt *
 import argparse
 import requests
 from bs4 import BeautifulSoup
@@ -46,6 +47,7 @@ def run():
     final_prediction = output_merging(prediction1_3, prediction2_4)
     #final_prediction = [{'pitch_cos': 0.59360904, 'pitch_sin': -0.24772033, 'roll': -3.1061471869521817, 'x': -11.181987056191053, 'y': 8.72277623304764, 'yaw': 0.16682477, 'z': 50.86036920547485, 'pitch': -0.3953410892477194, 'confidence': 0.7037750499289187}]
     print(final_prediction)
+    final_prediction = rule1(final_prediction)
     cv2.imwrite(args.output, visualize(image_to_show, final_prediction)[:, :, ::-1])
 
 if __name__ == '__main__':
