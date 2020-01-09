@@ -2,7 +2,7 @@
 ![Architectural Components Overview](demo/1.png)  
 ![Output](demo/2.png)  
   
-See [Deep Learning-Based Car Collision Warning.docx](https://github.com/FishLikeApple/IBM_ADD_code/raw/master/Deep%20Learning-Based%20Car%20Collision%20Warning.docx) in this project.
+See [Deep Learning-Based Car Collision Warning.docx](https://github.com/FishLikeApple/IBM_ADD_code/raw/master/Deep Learning-Based Car Collision Warning.docx) in this project.
 
 # Environment
 Linux or Windows, Python3, git, pip
