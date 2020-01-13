@@ -8,7 +8,7 @@ See [Deep Learning-Based Car Collision Warning.pdf](Deep%20Learning-Based%20Car%
 Linux or Windows, Python3, git, pip
 
 # How To Use
-use the following commands:  
+Use the following commands:  
 git clone https://github.com/FishLikeApple/IBM_ADD_code  
 git clone https://github.com/nianticlabs/monodepth2  
 pip install -r IBM_ADD_code/requirements.txt  
